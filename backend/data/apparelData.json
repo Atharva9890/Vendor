@@ -1,0 +1,142 @@
+{
+    "Brand1": {
+        "small": {
+            "quantity": 50,
+            "price": 19.99
+        },
+        "medium": {
+            "quantity": 30,
+            "price": 24.99
+        },
+        "large": {
+            "quantity": 20,
+            "price": 29.99
+        }
+    },
+    "Brand2": {
+        "small": {
+            "quantity": 40,
+            "price": 14.99
+        },
+        "medium": {
+            "quantity": 25,
+            "price": 22.99
+        },
+        "large": {
+            "quantity": 15,
+            "price": 27.99
+        }
+    },
+    "Brand3": {
+        "small": {
+            "quantity": 60,
+            "price": 17.99
+        },
+        "medium": {
+            "quantity": 35,
+            "price": 26.99
+        },
+        "large": {
+            "quantity": 18,
+            "price": 31.99
+        }
+    },
+    "Brand4": {
+        "small": {
+            "quantity": 45,
+            "price": 21.99
+        },
+        "medium": {
+            "quantity": 28,
+            "price": 19.99
+        },
+        "large": {
+            "quantity": 22,
+            "price": 34.99
+        }
+    },
+    "Brand5": {
+        "small": {
+            "quantity": 55,
+            "price": 23.99
+        },
+        "medium": {
+            "quantity": 32,
+            "price": 18.99
+        },
+        "large": {
+            "quantity": 25,
+            "price": 29.99
+        }
+    },
+    "Brand6": {
+        "small": {
+            "quantity": 38,
+            "price": 20.99
+        },
+        "medium": {
+            "quantity": 20,
+            "price": 23.99
+        },
+        "large": {
+            "quantity": 28,
+            "price": 26.99
+        }
+    },
+    "Brand7": {
+        "small": {
+            "quantity": 42,
+            "price": 25.99
+        },
+        "medium": {
+            "quantity": 18,
+            "price": 28.99
+        },
+        "large": {
+            "quantity": 30,
+            "price": 21.99
+        }
+    },
+    "Brand8": {
+        "small": {
+            "quantity": 48,
+            "price": 27.99
+        },
+        "medium": {
+            "quantity": 22,
+            "price": 24.99
+        },
+        "large": {
+            "quantity": 32,
+            "price": 30.99
+        }
+    },
+    "Brand9": {
+        "small": {
+            "quantity": 36,
+            "price": 16.99
+        },
+        "medium": {
+            "quantity": 15,
+            "price": 20.99
+        },
+        "large": {
+            "quantity": 26,
+            "price": 22.99
+        }
+    },
+    "Brand10": {
+        "small": {
+            "quantity": 50,
+            "price": 19.99
+        },
+        "medium": {
+            "quantity": 30,
+            "price": 24.99
+        },
+        "large": {
+            "quantity": 20,
+            "price": 29.99
+        }
+    }
+}
