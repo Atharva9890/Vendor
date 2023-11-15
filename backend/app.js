@@ -9,7 +9,7 @@ app.use(bodyParser.json()); // configure bodyParser as middleware to handle inco
 
 app.use('/api', stockController); // Apply stockController middleware to all requests under /api path.
 
-//Use process.env.PORT when pushing in prod.
+//Use process.env.PORT when pushing in production.
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
 });
