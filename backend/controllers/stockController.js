@@ -1,8 +1,9 @@
 const express = require('express');
-const stockService = require('../services/stockService');
+const stockService = require('../services/stockService'); //import stockService module to use updateStock, readData in api calls.
 
-const router = express.Router();
+const router = express.Router(); //create router object to define routes and middlewares
 
+//GET method to get all the apparels from databse/local json file. This API is not mentioned in TEST Document, it is added for testing purpose.
 router.get('/allApparels', (req, res) => {
     try {
         const data = stockService.readData()
@@ -12,58 +13,55 @@ router.get('/allApparels', (req, res) => {
     }
 })
 
+//Updates the stock quantity and price of one apparel code and size. 
+//Pass the apparelCode and size in request body
 router.put('/:apparelCode/:size', (req, res) => {
     try {
-        const { apparelCode, size } = req.params;
-        const { quantity, price } = req.body;
-
-        // Add validation if needed
+        const { apparelCode, size } = req.params; //Destructure code and size from request parameter
+        const { quantity, price } = req.body; //Destructure quantity and price from request body
 
         const result = stockService.updateStock(apparelCode, size, quantity, price);
 
         res.json(result);
     } catch (error) {
-        console.error(error);
+        console.error(error); //For debugging purpose, should be removed when pushing to production
         res.status(500).json({ message: 'Server Error!' });
     }
 });
 
-// PUT endpoint to simultaneously update stock and price for multiple apparel codes and sizes
+// Simultaneously update the stock quantity and price of several apparel codes and sizes.
 router.put('/updateMultipleStockPrices', (req, res) => {
     try {
-        const updates = req.body;
+        const updates = req.body; // Assuming request body will get array of stocks to be updated. (Content Type will be application/json when testing)
 
-        // Add validation if needed
-
-        for (const update of updates) {
+        for (const update of updates) { // Loop through each stock that needs to be updated and call updateStock function to update that stock
             const { apparelCode, size, quantity, price } = update;
             stockService.updateStock(apparelCode, size, quantity, price);
         }
 
-        res.json({ success: true, message: 'Stock and price updated successfully for multiple apparel codes and sizes' });
+        res.json({ message: 'Stock and price updated successfully for multiple apparel codes and sizes' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error!' });
     }
 });
 
-// POST endpoint to check if the requirement of a customer order can be fulfilled
+// POST API to check if the requirement of a customer order can be fulfilled or not
 router.post('/checkOrderFulfillment', (req, res) => {
     try {
-        const orderItems = req.body;
+        const orderItems = req.body; // Assuming request body will get array of stock/s that to be fulfilled . (Content Type will be application/json when testing)
 
-        // Add validation if needed
-
-        for (const item of orderItems) {
-            const { apparelCode, size, quantity } = item;
+        for (const item of orderItems) { // Iterating over each order
+            const { apparelCode, size, quantity } = item; // Destructure apparelCode, size and qunatity from individual order
             const apparelData = stockService.readData();
 
+            // Check if we can fulfill current order by checking availability of apparel, size and quantity
             if (
                 !apparelData[apparelCode] ||
                 !apparelData[apparelCode][size] ||
                 apparelData[apparelCode][size].quantity < quantity
             ) {
-                return res.json({ canFulfill: false, message: 'Order cannot be fulfilled' });
+                return res.json({ canFulfill: false, message: 'Sorry, Order cannot be fulfilled' });
             }
         }
 
@@ -74,37 +72,36 @@ router.post('/checkOrderFulfillment', (req, res) => {
     }
 });
 
-// POST endpoint to get the lowest cost at which the order can be fulfilled
+// POST API to get the lowest cost at which the order can be fulfilled
 router.post('/lowestCostForOrder', (req, res) => {
     try {
-        const orderItems = req.body;
-
-        // Add validation if needed
+        const orderItems = req.body; // Assuming request body will get array of stock/s that to be fulfilled . (Content Type will be application/json when testing)
 
         let totalCost = 0;
 
-        for (const item of orderItems) {
-            const { apparelCode, size, quantity } = item;
+        for (const item of orderItems) { // Iterating over each order
+            const { apparelCode, size, quantity } = item; // Destructure apparelCode, size and qunatity from individual order
             const apparelData = stockService.readData();
 
+            // Check if we can fulfill current order by checking availability of apparel, size and quantity
             if (
                 !apparelData[apparelCode] ||
                 !apparelData[apparelCode][size] ||
                 apparelData[apparelCode][size].quantity < quantity
             ) {
-                return res.json({ success: false, message: 'Order cannot be fulfilled' });
+                return res.json({ message: 'Sorry, Order cannot be fulfilled' });
             }
 
             const itemCost = apparelData[apparelCode][size].price * quantity;
-            totalCost += itemCost;
+            totalCost += itemCost; // Calculating totalCost 
         }
 
-        res.json({ success: true, totalCost });
+        res.json({ message: `Minimum cost for order will be : INR ${totalCost}` });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        res.status(500).json({ message: 'Server Error!' });
     }
 });
 
 
-module.exports = router;
+module.exports = router; // Export controller router to use in app.js file

@@ -1,7 +1,7 @@
 {
     "Brand1": {
         "small": {
-            "quantity": 50,
+            "quantity": 50000,
             "price": 19.99
         },
         "medium": {
@@ -127,7 +127,7 @@
     },
     "Brand10": {
         "small": {
-            "quantity": 50,
+            "quantity": 500,
             "price": 19.99
         },
         "medium": {
